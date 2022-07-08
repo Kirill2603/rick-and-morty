@@ -3,6 +3,8 @@ import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
 import { api, geCharacterResponse } from './api/rickAndMortyApi'
 import { Character } from './components/Character'
 import { createGlobalStyle } from 'styled-components'
+import { Header } from './components/Header'
+import Font from './assets/get_schwifty.ttf'
 
 const queryClient = new QueryClient()
 
@@ -11,7 +13,20 @@ type GlobalStyles = {
 }
 
 const GlobalTheme = createGlobalStyle<GlobalStyles>`
+  @font-face {
+    font-family: Get Schwifty;
+    src: url(${Font});
+  }
+
+  * {
+    font-family: Get Schwifty, Arial, SansSerif;
+    margin: 0;
+    padding: 0;
+  }
+
   body {
+
+
     background-color: ${props => props.theme === 'dark' ? '#202329' : '#ffffff'};
   }
 `
@@ -24,8 +39,9 @@ export function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <Header />
       <button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>Theme</button>
-      <GlobalTheme theme={theme}/>
+      <GlobalTheme theme={theme} />
       <Persons />
     </QueryClientProvider>
   )
