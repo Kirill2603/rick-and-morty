@@ -1,16 +1,16 @@
 import axios from 'axios'
 
-export type getPersonsResponse = {
+export type geCharacterResponse = {
   info: {
     count: number,
     pages: number,
     next: string,
     prev: string | null,
   },
-  results: PersonType[]
+  results: CharacterType[]
 }
 
-export type PersonType = {
+export type CharacterType = {
   id: number,
   name: string,
   status: string,
@@ -37,7 +37,7 @@ const apiInstance = axios.create({
 
 export const api = {
  async getPersons(page: number, ) {
-    const {data} = await apiInstance.get<getPersonsResponse>('character/', {
+    const {data} = await apiInstance.get<geCharacterResponse>('character/', {
       params: {page}
     })
     return data
